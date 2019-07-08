@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
-using FPT.Core.Commands;
 using FPT.Core.Exceptions;
 using System.Linq;
-namespace FPT.Core{
-    public class CommandExecutor{
+namespace FPT.Core.Commands{
+    public class RouterCommand : Command{
         private readonly List<Command> commands;
-        public CommandExecutor()
+        public RouterCommand(string commandId) : base(commandId)
         {
             commands = new List<Command>();
         }
-        public void Execute(params string[] args)
+        public RouterCommand() : this("")
+        {
+        }
+        public override object Execute(params string[] args)
         {
             if(args is null || args.Length == 0 || args[0] is null || args[0].Trim() == "")
             {
@@ -26,6 +28,7 @@ namespace FPT.Core{
             {
                 command.Execute(args.Skip(1).ToArray());
             }
+            return null;
         }
 
         public void Register(Command sc)

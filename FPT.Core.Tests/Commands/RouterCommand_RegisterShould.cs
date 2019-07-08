@@ -6,7 +6,7 @@ using Xunit;
 
 namespace FPT.Core.Tests
 {
-    public class CommandExecutor_RegisterShould
+    public class RouterCommand_RegisterShould
     {
         [Theory]
         [InlineData("")]
@@ -15,7 +15,7 @@ namespace FPT.Core.Tests
         public void RejectCommandsWithBlankCommandIds(string commandId)
         {
             var commandWithBlankId = new FakeCommand(commandId);
-            var ce = new CommandExecutor();
+            var ce = new RouterCommand();
 
             var e = Assert.Throws<ArgumentException>(() => ce.Register(commandWithBlankId));
             Assert.Equal("Command IDs cannot be blank.", e.Message);

@@ -7,7 +7,7 @@ namespace FPT.Core.IO
 {
     public interface IFPTContext
     {
-        IEnumerable<Level> Levels { get; set; }
-        IEnumerable<Course> Courses { get; set; }
+        IEnumerable<Level> Levels { get; }
+        IEnumerable<Course> Courses { get; }
     }
 }
