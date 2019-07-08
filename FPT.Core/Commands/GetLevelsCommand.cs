@@ -7,15 +7,15 @@ namespace FPT.Core.Commands
 {
     public class GetLevelsCommand : Command
     {
-        private IFPTContext context;
-        public GetLevelsCommand(string commandId, IFPTContext context) : base(commandId)
+        private ILevelsProvider levelsProvider;
+        public GetLevelsCommand(string commandId, ILevelsProvider levelsProvider) : base(commandId)
         {
-            this.context = context;
+            this.levelsProvider = levelsProvider;
         }
 
         public override object Execute(params string[] args)
         {
-            return context.Levels;
+            return levelsProvider.Levels;
         }
     }
 }

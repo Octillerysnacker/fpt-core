@@ -13,10 +13,9 @@ namespace FPT.Core.Tests.Commands
         [Fact]
         public void ReturnAllAvailableLevels()
         {
-            var context = new FakeFPTContext();
             var availableLevels = new Level[] { new Level(), new Level(), new Level() };
-            context.Levels = availableLevels;
-            var command = new GetLevelsCommand("",context);
+            var levelsProvider = new FakeLevelsProvider(availableLevels);
+            var command = new GetLevelsCommand("",levelsProvider);
 
             var result = (Level[])command.Execute();
 
