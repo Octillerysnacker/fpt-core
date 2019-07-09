@@ -6,10 +6,18 @@ namespace FPT.Core.Model
 {
     public class Level
     {
-        public string Name { get; set; }
-        public string Id { get; set; }
-        public string InitializerFilepath { get; set; }
-        public string VerifierFilepath { get; set; }
-        public string InstructionsFilepath { get; set; }
+        public string Name { get; }
+        public string Id { get; }
+        public string InitializerFilepath { get; }
+        public string VerifierFilepath { get; }
+        public string InstructionsFilepath { get; }
+        public Level(string name, string id, string initializerFilepath, string verifierFilepath, string instructionsFilepath)
+        {
+            Name = name;
+            Id = id;
+            InitializerFilepath = initializerFilepath;
+            VerifierFilepath = verifierFilepath;
+            InstructionsFilepath = instructionsFilepath;
+        }
     }
 }
