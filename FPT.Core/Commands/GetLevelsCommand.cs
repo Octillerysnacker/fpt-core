@@ -15,7 +15,7 @@ namespace FPT.Core.Commands
 
         public override object Execute(params string[] args)
         {
-            return levelsProvider.Levels;
+            return levelsProvider.GetLevels();
         }
     }
 }

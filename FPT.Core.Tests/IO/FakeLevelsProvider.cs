@@ -13,5 +13,10 @@ namespace FPT.Core.Tests.IO
         {
             Levels = levels;
         }
+
+        public IEnumerable<Level> GetLevels()
+        {
+            return Levels;
+        }
     }
 }

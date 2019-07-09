@@ -7,6 +7,6 @@ namespace FPT.Core.IO
 {
     public interface ILevelsProvider
     {
-        IEnumerable<Level> Levels { get; }
+        IEnumerable<Level> GetLevels();
     }
 }
