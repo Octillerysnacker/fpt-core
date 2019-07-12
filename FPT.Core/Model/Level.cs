@@ -11,13 +11,16 @@ namespace FPT.Core.Model
         public string InitializerFilepath { get; }
         public string VerifierFilepath { get; }
         public string InstructionsFilepath { get; }
-        public Level(string name, string id, string initializerFilepath, string verifierFilepath, string instructionsFilepath)
+        [Newtonsoft.Json.JsonIgnore]
+        public string FolderFilepath { get; }
+        public Level(string name = "", string id = "", string initializerFilepath = "", string verifierFilepath = "", string instructionsFilepath = "", string folderFilepath = "")
         {
             Name = name;
             Id = id;
             InitializerFilepath = initializerFilepath;
             VerifierFilepath = verifierFilepath;
             InstructionsFilepath = instructionsFilepath;
+            FolderFilepath = folderFilepath;
         }
     }
 }
