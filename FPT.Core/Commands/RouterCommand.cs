@@ -26,9 +26,8 @@ namespace FPT.Core.Commands{
             }
             else
             {
-                command.Execute(args.Skip(1).ToArray());
+                return command.Execute(args.Skip(1).ToArray());
             }
-            return null;
         }
 
         public void Register(Command sc)

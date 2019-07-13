@@ -108,5 +108,20 @@ namespace FPT.Core.Tests
 
             Assert.True(command.HasBeenRun);
         }
+        [Theory]
+        [InlineData("return me")]
+        [InlineData(3.14)]
+        [InlineData(true)]
+        public void ReturnResultOfExecutedCommand(object objToReturn)
+        {
+            string returnCommandId = "return";
+            ReturnCommand returnCommand = new ReturnCommand(returnCommandId, objToReturn);
+            RouterCommand routerCommand = new RouterCommand();
+            routerCommand.Register(returnCommand);
+
+            var result = routerCommand.Execute(returnCommandId);
+
+            Assert.Equal(objToReturn, result);
+        }
     }
 }
