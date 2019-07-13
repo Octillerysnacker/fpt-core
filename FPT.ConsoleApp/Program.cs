@@ -9,9 +9,9 @@ namespace FPT.ConsoleApp
         static void Main(string[] args)
         {
             var mainCommand = new RouterCommand();
-            mainCommand.Register(new GetLevelsCommand("levels", new FileSystemLevelsProvider(new FileSystem(), "")));
+            mainCommand.Register(new GetLevelsCommand("levels", new FileSystemLevelsProvider(new FileSystem(), ".")));
 
-            mainCommand.Execute(args);
+            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(mainCommand.Execute("levels")));
         }
     }
 }
