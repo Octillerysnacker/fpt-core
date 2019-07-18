@@ -85,7 +85,7 @@ namespace FPT.Core.Tests.IO
 
                 var nameOfMasterFolder = "master";
                 var nameOfProjectFolder = "project";
-                var expectedSourceDir = Path.Combine(levelToInitialize.FolderFilepath, nameOfMasterFolder);
+                var expectedSourceDir = Path.Combine(levelToInitialize.FolderFilepath, nameOfMasterFolder); //TO-DO: Remove logical dependencies on folder structure
                 var expectedDestDir = Path.Combine(levelToInitialize.FolderFilepath, userToInitialize, nameOfProjectFolder);
 
                 Add(levelsProvider, levelToInitialize.Id, userToInitialize, expectedSourceDir, expectedDestDir);
