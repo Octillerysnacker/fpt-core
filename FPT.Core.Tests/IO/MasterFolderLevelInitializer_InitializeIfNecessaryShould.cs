@@ -8,6 +8,7 @@ using System.Linq;
 using FPT.Core.IO;
 using FPT.Core.Model;
 using FPT.Core.Extensions;
+using FPT.Core.Tests.Extensions;
 namespace FPT.Core.Tests.IO
 {
     public class MasterFolderLevelInitializer_InitializeIfNecessaryShould
@@ -70,18 +71,11 @@ namespace FPT.Core.Tests.IO
             }
             private void CreateAndAddRandomizedData()
             {
-                var amountOfLevels = random.Next(minLevelsPerProvider, maxLevelsPerProvider);
-                var levels = new List<Level>();
-                for(int i = 0; i < amountOfLevels; i++)
-                {
-                    levels.Add(GenerateRandomLevelWithNecessaryProperties());
-                }
 
-                var levelToInitialize = GenerateRandomLevelWithNecessaryProperties();
-                levels.Add(levelToInitialize);
+                var levelsProvider = random.GenerateRandomLevelsWithProvider(minLevelsPerProvider, maxLevelsPerProvider);
+                var levelToInitialize = levelsProvider.GetLevels().RandomElementUsing(random);
 
                 var userToInitialize = random.RandomString(arbritraryLength);
-                var levelsProvider = new FakeLevelsProvider(levels);
 
                 var nameOfMasterFolder = "master";
                 var nameOfProjectFolder = "project";
@@ -89,11 +83,6 @@ namespace FPT.Core.Tests.IO
                 var expectedDestDir = Path.Combine(levelToInitialize.FolderFilepath, userToInitialize, nameOfProjectFolder);
 
                 Add(levelsProvider, levelToInitialize.Id, userToInitialize, expectedSourceDir, expectedDestDir);
-            }
-            private Level GenerateRandomLevelWithNecessaryProperties()
-            {
-                return new Level(id: random.RandomString(arbritraryLength),
-                                 folderFilepath: Path.Combine("c:",Path.GetRandomFileName()));
             }
         }
     }
