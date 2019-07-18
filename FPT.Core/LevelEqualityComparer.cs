@@ -4,7 +4,6 @@ using System.Text;
 using FPT.Core.Model;
 namespace FPT.Core
 {
-    //TO-DO: Veriy equality comparer is correctly implemented
     public class LevelEqualityComparer : IEqualityComparer<Level>
     {
         public bool Equals(Level x, Level y)
@@ -21,12 +20,14 @@ namespace FPT.Core
         {
             unchecked
             {
-                return obj.Name.GetHashCode() * 3 +
-                    obj.Id.GetHashCode() * 5 +
-                    obj.InitializerFilepath.GetHashCode() * 7 +
-                    obj.VerifierFilepath.GetHashCode() * 11 +
-                    obj.InstructionsFilepath.GetHashCode() * 13 +
-                    obj.FolderFilepath.GetHashCode() * 17;
+                int hash = 29;
+                hash = hash * 41 + obj.Name.GetHashCode();
+                hash = hash * 41 + obj.Id.GetHashCode();
+                hash = hash * 41 + obj.InitializerFilepath.GetHashCode();
+                hash = hash * 41 + obj.VerifierFilepath.GetHashCode();
+                hash = hash * 41 + obj.InstructionsFilepath.GetHashCode();
+                hash = hash * 41 + obj.FolderFilepath.GetHashCode();
+                return hash;
             }
         }
     }
