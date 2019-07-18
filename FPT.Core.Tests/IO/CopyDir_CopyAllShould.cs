@@ -15,7 +15,7 @@ namespace FPT.Core.Tests.IO
         [ClassData(typeof(CopyAllFilesAndSubdirectories_TestData))]
         public void CopyAllFilesAndSubdirectories(MockFileSystem mockFileSystem, string sourceDir, string destinationDir, MockFileSystem expectedMockFileSystem)
         {
-            var copyDir = new CopyDir(mockFileSystem.Directory, mockFileSystem.Path);
+            var copyDir = new CopyDir(mockFileSystem);
             var mockFactory = new MockDirectoryInfoFactory(mockFileSystem);
 
             copyDir.CopyAll(mockFactory.FromDirectoryName(sourceDir), mockFactory.FromDirectoryName(destinationDir));

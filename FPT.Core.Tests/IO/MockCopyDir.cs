@@ -10,7 +10,7 @@ namespace FPT.Core.Tests.IO
         public string SuppliedSourceDir { get; private set; }
         public string SuppliedDestDir { get; private set; }
 
-        public void CopyTo(string source, string dest)
+        public void CopyAll(string source, string dest)
         {
             DidCopy = true;
             SuppliedSourceDir = source;

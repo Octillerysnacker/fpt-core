@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using System.IO.Abstractions;
 using System.Text;
-
+using System.IO;
 namespace FPT.Core.IO
 {
     //Literally copied straight from MSDN, but with modifications to accomodate IO abstractions
-    public class CopyDir
+    public class CopyDir : ICopyDir
     {
         private IDirectory directory;
         private IPath path;
-        public CopyDir(IDirectory directory, IPath path)
+        private IFileSystem fileSystem;
+        public CopyDir(IFileSystem fileSystem)
         {
-            this.directory = directory;
-            this.path = path;
+            this.fileSystem = fileSystem;
+            path = fileSystem.Path;
+            directory = fileSystem.Directory;
+        }
+        //TODO: Possibly move this to another class?
+        public void CopyAll(string source, string target)
+        {
+            //TODO: Remove concrete dependency/change to abstract factory
+            var sourceDirectoryInfo = new DirectoryInfo(source);
+            var targetDirectoryInfo = new DirectoryInfo(target);
+            CopyAll(new DirectoryInfoWrapper(fileSystem, sourceDirectoryInfo), new DirectoryInfoWrapper(fileSystem, targetDirectoryInfo));
         }
         public void CopyAll(IDirectoryInfo source, IDirectoryInfo target)
         {

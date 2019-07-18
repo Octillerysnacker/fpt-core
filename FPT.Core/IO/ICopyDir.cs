@@ -6,6 +6,6 @@ namespace FPT.Core.IO
 {
     public interface ICopyDir
     {
-        void CopyTo(string source, string dest);
+        void CopyAll(string source, string dest);
     }
 }

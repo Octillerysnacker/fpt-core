@@ -30,7 +30,7 @@ namespace FPT.Core.IO
                 var masterFolder = path.Combine(levelToInitialize.FolderFilepath, "master");
                 var userFolder = path.Combine(levelToInitialize.FolderFilepath, user, "project");
 
-                copyDir.CopyTo(masterFolder, userFolder);
+                copyDir.CopyAll(masterFolder, userFolder);
             }
         }
     }
