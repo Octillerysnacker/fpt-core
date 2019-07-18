@@ -8,6 +8,7 @@ namespace FPT.Core.Tests.IO
     {
         public bool ShouldInitialize { get; }
         public string SuppliedUserFolderPath { get; private set; }
+        public bool IsMarkedAsInitialized { get; set; }
         public MockLevelInitializationDeterminer(bool shouldInitialize)
         {
             ShouldInitialize = shouldInitialize;
@@ -16,6 +17,11 @@ namespace FPT.Core.Tests.IO
         {
             SuppliedUserFolderPath = userFolderPath;
             return ShouldInitialize;
+        }
+
+        public void MarkAsInitialized(string userFolderPath)
+        {
+            IsMarkedAsInitialized = true;
         }
     }
 }

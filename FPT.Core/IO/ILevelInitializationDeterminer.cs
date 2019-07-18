@@ -7,5 +7,6 @@ namespace FPT.Core.IO
     public interface ILevelInitializationDeterminer
     {
         bool RequiresInitialization(string userFolderPath);
+        void MarkAsInitialized(string userFolderPath);
     }
 }
