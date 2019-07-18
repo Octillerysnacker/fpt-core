@@ -6,6 +6,7 @@ using FPT.Core.IO;
 using System.IO;
 using Xunit;
 using System.Linq;
+using FPT.Core.Extensions;
 namespace FPT.Core.Tests.IO
 {
     public class CopyDir_CopyAllShould
@@ -33,16 +34,6 @@ namespace FPT.Core.Tests.IO
                 {
                     AddData();
                 }
-            }
-            private static string GenerateRandomAlphanumericString(int length)
-            {
-                string validChars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
-                StringBuilder stringBuilder = new StringBuilder();
-                for(int i = 0; i < length; i++)
-                {
-                    stringBuilder.Append(validChars[random.Next(validChars.Length)]);
-                }
-                return stringBuilder.ToString();
             }
             private void AddData()
             {
@@ -75,7 +66,7 @@ namespace FPT.Core.Tests.IO
                     return new StemFile()
                     {
                         FilePathStem = Path.Combine(Path.GetRandomFileName(), Path.GetRandomFileName()),
-                        MockFileData = new MockFileData(GenerateRandomAlphanumericString(50))
+                        MockFileData = new MockFileData(random.RandomString(50))
                     };
                 }
             }
