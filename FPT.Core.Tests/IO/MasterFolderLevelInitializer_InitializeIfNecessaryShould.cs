@@ -37,6 +37,7 @@ namespace FPT.Core.Tests.IO
             masterFolderLevelInitializer.InitializeIfNecessary(levelId, someUser);
 
             Assert.Equal(shouldInitialize, copyDir.DidCopy);
+            Assert.Equal(shouldInitialize, initializationDeterminer.IsMarkedAsInitialized);
         }
         [Theory]
         [ClassData(typeof(CopyCorrectFilesToCorrectLocation_TestData))]

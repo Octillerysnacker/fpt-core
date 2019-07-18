@@ -32,6 +32,8 @@ namespace FPT.Core.IO
                 var projectFolder = path.Combine(userFolder, "project");
 
                 copyDir.CopyAll(masterFolder, projectFolder);
+
+                levelInitializationDeterminer.MarkAsInitialized(userFolder);
             }
         }
     }
