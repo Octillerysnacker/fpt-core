@@ -6,6 +6,6 @@ namespace FPT.Core.IO
 {
     public interface ILevelInitializationDeterminer
     {
-        bool RequiresInitialization(string levelId, string user);
+        bool RequiresInitialization(string userFolderPath);
     }
 }

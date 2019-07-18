@@ -23,14 +23,15 @@ namespace FPT.Core.IO
         }
         public void InitializeIfNecessary(string levelId, string user)
         {
-            if(levelInitializationDeterminer.RequiresInitialization(levelId, user))
+            var levelToInitialize = levelsProvider.GetLevels().Single(level => level.Id == levelId);
+            var userFolder = path.Combine(levelToInitialize.FolderFilepath, user);
+            if(levelInitializationDeterminer.RequiresInitialization(userFolder))
             {
-                var levelToInitialize = levelsProvider.GetLevels().Single(level => level.Id == levelId);
                 //TO-DO: Remove logical dependency on folder structure
                 var masterFolder = path.Combine(levelToInitialize.FolderFilepath, "master");
-                var userFolder = path.Combine(levelToInitialize.FolderFilepath, user, "project");
+                var projectFolder = path.Combine(userFolder, "project");
 
-                copyDir.CopyAll(masterFolder, userFolder);
+                copyDir.CopyAll(masterFolder, projectFolder);
             }
         }
     }
