@@ -33,5 +33,16 @@ namespace FPT.Core.Tests.IO
 
             Assert.True(result);
         }
+        [Theory]
+        [ClassData(typeof(RandomPathsDataSet))]
+        public void ReturnTrueWhenUserFolderDoesNotExist(string userFolder)
+        {
+            var mockFileSystem = new MockFileSystem();
+            var determiner = new UserJsonLevelInitializationDeterminer(mockFileSystem);
+
+            var result = determiner.RequiresInitialization(userFolder);
+
+            Assert.True(result);
+        }
     }
 }

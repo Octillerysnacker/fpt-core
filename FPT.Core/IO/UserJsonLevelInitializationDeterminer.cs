@@ -8,21 +8,33 @@ namespace FPT.Core.IO
     public class UserJsonLevelInitializationDeterminer : ILevelInitializationDeterminer
     {
         private IFileSystem fileSystem;
+        private IDirectory directory;
         private string userJsonFileName = "user.json";
         public UserJsonLevelInitializationDeterminer(IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;
+            this.directory = fileSystem.Directory;
         }
 
         public void MarkAsInitialized(string userFolderPath)
         {
+            directory.CreateDirectory(userFolderPath);
             fileSystem.File.Create(fileSystem.Path.Combine(userFolderPath, userJsonFileName));
         }
 
         public bool RequiresInitialization(string userFolderPath)
         {
+            //TODO: Check whether userFolder even exists
             //TODO: Make this more clear
-            return fileSystem.Directory.EnumerateFiles(userFolderPath, userJsonFileName).Count() != 1;
+            if (!directory.Exists(userFolderPath))
+            {
+                return true;
+            }
+            else
+            {
+                int amountOfUserJsonFiles = fileSystem.Directory.EnumerateFiles(userFolderPath, userJsonFileName).Count();
+                return amountOfUserJsonFiles != 1;
+            }
         }
     }
 }

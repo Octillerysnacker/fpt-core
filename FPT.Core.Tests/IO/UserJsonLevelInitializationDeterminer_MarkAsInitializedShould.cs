@@ -23,5 +23,17 @@ namespace FPT.Core.Tests.IO
 
             Assert.True(mockFileSystem.FileExists(jsonFilePath));
         }
+        [Theory]
+        [ClassData(typeof(RandomPathsDataSet))]
+        public void CreateUserFolderIfDoesNotExist(string userFolder)
+        {
+            var mockFileSystem = new MockFileSystem();
+            var determiner = new UserJsonLevelInitializationDeterminer(mockFileSystem);
+            var jsonFilePath = mockFileSystem.Path.Combine(userFolder, "user.json");
+
+            determiner.MarkAsInitialized(userFolder);
+
+            Assert.True(mockFileSystem.FileExists(jsonFilePath));
+        }
     }
 }
