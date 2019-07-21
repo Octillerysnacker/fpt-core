@@ -23,15 +23,15 @@ namespace FPT.Core.Tests.IO
             var copyDir = new MockCopyDir();
 
             var levelId = "level";
-            var levelToInitialize = new Level(id: levelId);
+            var levelToInitialize = new Level(id: levelId, folderFilepath: ".");
             var levelsProvider = new FakeLevelsProvider(new[] { levelToInitialize });
-
-            var path = new MockPath(new MockFileSystem());
+            var mockFileSystem = new MockFileSystem();
+            mockFileSystem.AddDirectory(Path.Combine(".", "master")); //will throw error if no master folder
 
             var masterFolderLevelInitializer = new MasterFolderLevelInitializer(initializationDeterminer,
                                                                                 copyDir,
                                                                                 levelsProvider,
-                                                                                path);
+                                                                                mockFileSystem.Path);
 
             var someUser = "user";
             masterFolderLevelInitializer.InitializeIfNecessary(levelId, someUser);
@@ -45,16 +45,36 @@ namespace FPT.Core.Tests.IO
         {
             var determinerIndicatingInitialization = new MockLevelInitializationDeterminer(true);
             var copyDir = new MockCopyDir();
+            var mockFileSystem = new MockFileSystem();
+            foreach(var level in fakeLevelsProvider.GetLevels())
+            {
+                mockFileSystem.AddDirectory(mockFileSystem.Path.Combine(level.FolderFilepath, "master")); //put master folder in every level folder to prevent error
+            }
+            var masterFolderLevelInitializer = new MasterFolderLevelInitializer(determinerIndicatingInitialization,
+                                                                                copyDir,
+                                                                                fakeLevelsProvider,
+                                                                                mockFileSystem.Path);
+
+            masterFolderLevelInitializer.InitializeIfNecessary(levelId, user);
+
+            Assert.Equal(expectedSourceDir, copyDir.SuppliedSourceDir);
+            Assert.Equal(expectedDestDir, copyDir.SuppliedDestDir);
+        }
+        //TODO: Create separate class file for function
+        [Theory]
+        [ClassData(typeof(CopyCorrectFilesToCorrectLocation_TestData))]
+        public void ThrowExceptionIfMasterFolderDoesNotExist(FakeLevelsProvider fakeLevelsProvider, string levelId, string user, string expectedSourceDir, string expectedDestDir)
+        {
+            var determinerIndicatingInitialization = new MockLevelInitializationDeterminer(true);
+            var copyDir = new MockCopyDir();
             var path = new MockPath(new MockFileSystem());
             var masterFolderLevelInitializer = new MasterFolderLevelInitializer(determinerIndicatingInitialization,
                                                                                 copyDir,
                                                                                 fakeLevelsProvider,
                                                                                 path);
 
-            masterFolderLevelInitializer.InitializeIfNecessary(levelId, user);
-
-            Assert.Equal(expectedSourceDir, copyDir.SuppliedSourceDir);
-            Assert.Equal(expectedDestDir, copyDir.SuppliedDestDir);
+            var exception = Assert.Throws<DirectoryNotFoundException>(() => masterFolderLevelInitializer.InitializeIfNecessary(levelId, user));
+            Assert.Equal($"Master folder for level {levelId} not found.", exception.Message);
         }
         public class CopyCorrectFilesToCorrectLocation_TestData : TheoryData<FakeLevelsProvider, string, string ,string, string>
         {

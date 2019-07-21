@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.IO.Abstractions;
+using System.IO;
+
 namespace FPT.Core.IO
 {
     public class MasterFolderLevelInitializer : ILevelInitializer
@@ -31,9 +33,16 @@ namespace FPT.Core.IO
                 var masterFolder = path.Combine(levelToInitialize.FolderFilepath, "master");
                 var projectFolder = path.Combine(userFolder, "project");
 
-                copyDir.CopyAll(masterFolder, projectFolder);
+                if (!path.FileSystem.Directory.Exists(masterFolder))
+                {
+                    throw new DirectoryNotFoundException($"Master folder for level {levelId} not found.");
+                }
+                else
+                {
+                    copyDir.CopyAll(masterFolder, projectFolder);
 
-                levelInitializationDeterminer.MarkAsInitialized(userFolder);
+                    levelInitializationDeterminer.MarkAsInitialized(userFolder);
+                }
             }
         }
     }
