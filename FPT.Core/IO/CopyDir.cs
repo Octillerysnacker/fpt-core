@@ -17,10 +17,8 @@ namespace FPT.Core.IO
             path = fileSystem.Path;
             directory = fileSystem.Directory;
         }
-        //TODO: Possibly move this to another class?
         public void CopyAll(string source, string target)
         {
-            //TODO: Remove concrete dependency/change to abstract factory
             var directoryInfoFactory = fileSystem.DirectoryInfo;
             var sourceDirectoryInfo = directoryInfoFactory.FromDirectoryName(source);
             var targetDirectoryInfo = directoryInfoFactory.FromDirectoryName(target);
