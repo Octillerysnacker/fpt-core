@@ -24,8 +24,6 @@ namespace FPT.Core.IO
 
         public bool RequiresInitialization(string userFolderPath)
         {
-            //TODO: Check whether userFolder even exists
-            //TODO: Make this more clear
             if (!directory.Exists(userFolderPath))
             {
                 return true;
