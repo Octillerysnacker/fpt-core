@@ -21,9 +21,10 @@ namespace FPT.Core.IO
         public void CopyAll(string source, string target)
         {
             //TODO: Remove concrete dependency/change to abstract factory
-            var sourceDirectoryInfo = new DirectoryInfo(source);
-            var targetDirectoryInfo = new DirectoryInfo(target);
-            CopyAll(new DirectoryInfoWrapper(fileSystem, sourceDirectoryInfo), new DirectoryInfoWrapper(fileSystem, targetDirectoryInfo));
+            var directoryInfoFactory = fileSystem.DirectoryInfo;
+            var sourceDirectoryInfo = directoryInfoFactory.FromDirectoryName(source);
+            var targetDirectoryInfo = directoryInfoFactory.FromDirectoryName(target);
+            CopyAll(sourceDirectoryInfo,targetDirectoryInfo);
         }
         public void CopyAll(IDirectoryInfo source, IDirectoryInfo target)
         {

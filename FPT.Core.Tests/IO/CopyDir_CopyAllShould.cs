@@ -16,9 +16,8 @@ namespace FPT.Core.Tests.IO
         public void CopyAllFilesAndSubdirectories(MockFileSystem mockFileSystem, string sourceDir, string destinationDir, MockFileSystem expectedMockFileSystem)
         {
             var copyDir = new CopyDir(mockFileSystem);
-            var mockFactory = new MockDirectoryInfoFactory(mockFileSystem);
 
-            copyDir.CopyAll(mockFactory.FromDirectoryName(sourceDir), mockFactory.FromDirectoryName(destinationDir));
+            copyDir.CopyAll(sourceDir, destinationDir);
 
             //TO-DO: Replace with proper equality comparer
             Assert.Equal(mockFileSystem.AllPaths.OrderBy(s => s), expectedMockFileSystem.AllPaths.OrderBy(s => s));
