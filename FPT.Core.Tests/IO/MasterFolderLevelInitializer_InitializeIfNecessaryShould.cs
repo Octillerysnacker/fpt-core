@@ -78,11 +78,8 @@ namespace FPT.Core.Tests.IO
         }
         public class CopyCorrectFilesToCorrectLocation_TestData : TheoryData<FakeLevelsProvider, string, string ,string, string>
         {
-            private Random random = new Random();
-            private int minLevelsPerProvider = 1;
-            private int maxLevelsPerProvider = 10;
-            private int arbritraryLength = 25;
             private int numberOfDataSets = 4;
+            private RandomTriadFactory factory = new RandomTriadFactory();
             public CopyCorrectFilesToCorrectLocation_TestData()
             {
                 for(int i = 0; i < numberOfDataSets; i++)
@@ -92,18 +89,15 @@ namespace FPT.Core.Tests.IO
             }
             private void CreateAndAddRandomizedData()
             {
-
-                var levelsProvider = random.GenerateRandomLevelsWithProvider(minLevelsPerProvider, maxLevelsPerProvider);
-                var levelToInitialize = levelsProvider.GetLevels().RandomElementUsing(random);
-
-                var userToInitialize = random.RandomString(arbritraryLength);
+                var triad = factory.CreateTriad();
 
                 var nameOfMasterFolder = "master";
                 var nameOfProjectFolder = "project";
-                var expectedSourceDir = Path.Combine(levelToInitialize.FolderFilepath, nameOfMasterFolder); //TO-DO: Remove logical dependencies on folder structure
-                var expectedDestDir = Path.Combine(levelToInitialize.FolderFilepath, userToInitialize, nameOfProjectFolder);
 
-                Add(levelsProvider, levelToInitialize.Id, userToInitialize, expectedSourceDir, expectedDestDir);
+                var expectedSourceDir = Path.Combine(triad.Level.FolderFilepath, nameOfMasterFolder); //TO-DO: Remove logical dependencies on folder structure
+                var expectedDestDir = Path.Combine(triad.Level.FolderFilepath, triad.User, nameOfProjectFolder);
+
+                Add(triad.Provider, triad.Level.Id, triad.User, expectedSourceDir, expectedDestDir);
             }
         }
     }
