@@ -5,7 +5,7 @@ using FPT.Core.IO;
 using System.Linq;
 namespace FPT.Core.Commands
 {
-    public class OpenLevelCommand : Command
+    public class OpenLevelCommand : IExecutable
     {
         private ILevelInitializer levelInitializer;
         private ILevelsProvider levelsProvider;

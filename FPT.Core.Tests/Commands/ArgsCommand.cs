@@ -5,7 +5,7 @@ using FPT.Core.Commands;
 using System.Linq;
 namespace FPT.Core.Commands
 {
-    public class ArgsCommand : Command
+    public class ArgsCommand : IExecutable
     {
         public string[] Args { get; private set; }
 

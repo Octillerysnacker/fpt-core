@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FPT.Core.Commands
 {
-    public class ReturnCommand : Command
+    public class ReturnCommand : IExecutable
     {
         private readonly object objToReturn;
         public ReturnCommand(string commandId, object objToReturn) : base(commandId)

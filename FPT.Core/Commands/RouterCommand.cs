@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using FPT.Core.Exceptions;
 using System.Linq;
 namespace FPT.Core.Commands{
-    public class RouterCommand : Command{
-        private readonly List<Command> commands;
+    public class RouterCommand : IExecutable{
+        private readonly List<IExecutable> commands;
         public RouterCommand(string commandId) : base(commandId)
         {
-            commands = new List<Command>();
+            commands = new List<IExecutable>();
         }
         public RouterCommand() : this("")
         {
@@ -30,7 +30,7 @@ namespace FPT.Core.Commands{
             }
         }
 
-        public void Register(Command sc)
+        public void Register(IExecutable sc)
         {
             if(sc.CommandId.Trim() == "")
             {

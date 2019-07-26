@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FPT.Core.Commands
 {
-    public class GetLevelsCommand : Command
+    public class GetLevelsCommand : IExecutable
     {
         private ILevelsProvider levelsProvider;
         public GetLevelsCommand(string commandId, ILevelsProvider levelsProvider) : base(commandId)

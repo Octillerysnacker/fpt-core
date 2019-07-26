@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FPT.Core.Commands
 {
-    public class SignalCommand : Command
+    public class SignalCommand : IExecutable
     {
         public SignalCommand(string commandId) :
             base(commandId)

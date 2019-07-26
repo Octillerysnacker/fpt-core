@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FPT.Core.Commands
 {
-    public class FakeCommand : Command
+    public class FakeCommand : IExecutable
     {
         public FakeCommand(string commandId) : base(commandId)
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FPT.Core.Commands
 {
-    public class GetCoursesCommand : Command
+    public class GetCoursesCommand : IExecutable
     {
         private IFPTContext context;
         public GetCoursesCommand(string commandId, IFPTContext context) : base(commandId)
