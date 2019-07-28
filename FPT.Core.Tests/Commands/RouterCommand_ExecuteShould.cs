@@ -15,10 +15,10 @@ namespace FPT.Core.Tests
 
         public void ExecuteSpecifiedRegisteredCommand(string commandId){
             var ce = new RouterCommand();
-            var commandToRun = new SignalCommand(commandId);
-            var commandNotToRun = new SignalCommand("anotherCommand");
-            ce.Register(commandToRun);
-            ce.Register(commandNotToRun);
+            var commandToRun = new SignalCommand();
+            var commandNotToRun = new SignalCommand();
+            ce.Register(commandId, commandToRun);
+            ce.Register("anotherCommand",commandNotToRun);
 
             ce.Execute(commandId);
 
@@ -50,8 +50,8 @@ namespace FPT.Core.Tests
         public void PassAllParametersExceptCommandIdToCommandExecute(params string[] args)
         {
             var ce = new RouterCommand();
-            var ac = new ArgsCommand("test");
-            ce.Register(ac);
+            var ac = new ArgsCommand();
+            ce.Register("test", ac);
 
             ce.Execute(args);
 
@@ -101,8 +101,8 @@ namespace FPT.Core.Tests
         public void IgnoresLeadingAndTrailingWhitespaceInCommandIds(string commandId, string commandIdToExecute)
         {
             var ce = new RouterCommand();
-            var command = new SignalCommand(commandId);
-            ce.Register(command);
+            var command = new SignalCommand();
+            ce.Register(commandId,command);
 
             ce.Execute(commandIdToExecute);
 
@@ -115,9 +115,9 @@ namespace FPT.Core.Tests
         public void ReturnResultOfExecutedCommand(object objToReturn)
         {
             string returnCommandId = "return";
-            ReturnCommand returnCommand = new ReturnCommand(returnCommandId, objToReturn);
+            ReturnCommand returnCommand = new ReturnCommand(objToReturn);
             RouterCommand routerCommand = new RouterCommand();
-            routerCommand.Register(returnCommand);
+            routerCommand.Register(returnCommandId, returnCommand);
 
             var result = routerCommand.Execute(returnCommandId);
 

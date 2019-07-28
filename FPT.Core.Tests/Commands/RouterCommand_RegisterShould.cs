@@ -14,10 +14,10 @@ namespace FPT.Core.Tests
         [InlineData("   ")]
         public void RejectCommandsWithBlankCommandIds(string commandId)
         {
-            var commandWithBlankId = new FakeCommand(commandId);
+            var commandWithBlankId = new FakeCommand();
             var ce = new RouterCommand();
 
-            var e = Assert.Throws<ArgumentException>(() => ce.Register(commandWithBlankId));
+            var e = Assert.Throws<ArgumentException>(() => ce.Register(commandId, commandWithBlankId));
             Assert.Equal("Command IDs cannot be blank.", e.Message);
         }
     }

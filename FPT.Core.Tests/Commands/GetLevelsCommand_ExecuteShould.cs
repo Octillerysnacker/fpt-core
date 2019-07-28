@@ -15,7 +15,7 @@ namespace FPT.Core.Tests.Commands
         {
             var availableLevels = new Level[] { new Level(), new Level(), new Level() };
             var levelsProvider = new FakeLevelsProvider(availableLevels);
-            var command = new GetLevelsCommand("",levelsProvider);
+            var command = new GetLevelsCommand(levelsProvider);
 
             var result = (Level[])command.Execute();
 

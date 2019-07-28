@@ -18,7 +18,7 @@ namespace FPT.Core.Tests.Commands
         [ClassData(typeof(ProjectFolderTestData))]
         public void ReturnProjectFolderPathForSpecifiedLevelAndUser(FakeLevelsProvider provider, string levelId, string user, string expectedPath)
         {
-            var command = new OpenLevelCommand("", new MockLevelInitializer(), provider);
+            var command = new OpenLevelCommand(new MockLevelInitializer(), provider);
 
             var result = command.Execute(levelId, user);
 
@@ -29,7 +29,7 @@ namespace FPT.Core.Tests.Commands
         public void SupplyCorrectParametersToInitializer(FakeLevelsProvider provider, string levelId, string user)
         {
             var initializer = new MockLevelInitializer();
-            var command = new OpenLevelCommand("", initializer, provider);
+            var command = new OpenLevelCommand(initializer, provider);
 
             command.Execute(levelId, user);
 

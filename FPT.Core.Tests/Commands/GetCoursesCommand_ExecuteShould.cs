@@ -15,7 +15,7 @@ namespace FPT.Core.Tests.Commands
             var context = new FakeFPTContext();
             var courses = new Course[] { new Course(), new Course(), new Course() };
             context.Courses = courses;
-            var command = new GetCoursesCommand("", context);
+            var command = new GetCoursesCommand(context);
 
             var result = (Course[])command.Execute();
 

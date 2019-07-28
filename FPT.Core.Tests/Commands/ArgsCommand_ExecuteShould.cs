@@ -13,7 +13,7 @@ namespace FPT.Core.Tests.Commands
         [InlineData("jumps","over","the","lazy","dog")]
         public void SetArgsToExecuteParamters(params string[] args)
         {
-            var ac = new ArgsCommand("");
+            var ac = new ArgsCommand();
 
             ac.Execute(args);
 

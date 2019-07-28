@@ -29,7 +29,8 @@ namespace FPT.Core.Commands{
 
         public void Register(string id, IExecutable sc)
         {
-            if(id.Trim() == "")
+            id = id.Trim();
+            if(id == "")
             {
                 throw new ArgumentException("Command IDs cannot be blank.");
             }
