@@ -9,13 +9,13 @@ namespace FPT.Core.Commands
     {
         private ILevelInitializer levelInitializer;
         private ILevelsProvider levelsProvider;
-        public OpenLevelCommand(string commandId,ILevelInitializer levelInitializer, ILevelsProvider levelsProvider) : base(commandId)
+        public OpenLevelCommand(ILevelInitializer levelInitializer, ILevelsProvider levelsProvider)
         {
             this.levelInitializer = levelInitializer;
             this.levelsProvider = levelsProvider;
         }
 
-        public override object Execute(params string[] args)
+        public object Execute(params string[] args)
         {
             string levelId = args[0];
             string user = args[1];

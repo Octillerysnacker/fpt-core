@@ -8,12 +8,12 @@ namespace FPT.Core.Commands
     public class GetLevelsCommand : IExecutable
     {
         private ILevelsProvider levelsProvider;
-        public GetLevelsCommand(string commandId, ILevelsProvider levelsProvider) : base(commandId)
+        public GetLevelsCommand(ILevelsProvider levelsProvider)
         {
             this.levelsProvider = levelsProvider;
         }
 
-        public override object Execute(params string[] args)
+        public object Execute(params string[] args)
         {
             return levelsProvider.GetLevels();
         }
