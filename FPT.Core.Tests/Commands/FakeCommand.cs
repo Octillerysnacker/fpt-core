@@ -6,11 +6,7 @@ namespace FPT.Core.Commands
 {
     public class FakeCommand : IExecutable
     {
-        public FakeCommand(string commandId) : base(commandId)
-        {
-        }
-
-        public override object Execute(params string[] args)
+        public object Execute(params string[] args)
         {
             throw new NotImplementedException();
         }

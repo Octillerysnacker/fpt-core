@@ -8,11 +8,11 @@ namespace FPT.Core.Commands
     public class ReturnCommand : IExecutable
     {
         private readonly object objToReturn;
-        public ReturnCommand(string commandId, object objToReturn) : base(commandId)
+        public ReturnCommand(object objToReturn)
         {
             this.objToReturn = objToReturn;
         }
-        public override object Execute(params string[] args)
+        public object Execute(params string[] args)
         {
             return objToReturn;
         }

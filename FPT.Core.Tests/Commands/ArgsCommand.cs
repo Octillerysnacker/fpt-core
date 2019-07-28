@@ -8,13 +8,7 @@ namespace FPT.Core.Commands
     public class ArgsCommand : IExecutable
     {
         public string[] Args { get; private set; }
-
-        public ArgsCommand(string commandId) :
-            base(commandId)
-        {
-
-        }
-        public override object Execute(string[] args)
+        public object Execute(string[] args)
         {
             Args = args;
             return null;

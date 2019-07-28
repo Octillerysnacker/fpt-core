@@ -6,13 +6,8 @@ namespace FPT.Core.Commands
 {
     public class SignalCommand : IExecutable
     {
-        public SignalCommand(string commandId) :
-            base(commandId)
-        {
-        }
-
         public bool HasBeenRun { get; private set; }
-        public override object Execute(params string[] args)
+        public object Execute(params string[] args)
         {
             HasBeenRun = true;
             return null;
