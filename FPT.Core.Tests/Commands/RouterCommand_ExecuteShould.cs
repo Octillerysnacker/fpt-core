@@ -8,7 +8,6 @@ using FPT.Core.Tests.Commands;
 namespace FPT.Core.Tests
 {
     public class RouterCommand_ExecuteShould{
-        const string ArgumentExceptionErrorMessage = "Command ID must exist, not be null or empty.";
         [Theory]
         [InlineData("test1")]
         [InlineData("test2")]
@@ -58,38 +57,37 @@ namespace FPT.Core.Tests
             Assert.True(ac.Args.SequenceEqual(args.Skip(1)));
         }
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData("    ")]
-        public void ThrowsArgumentExceptionWhenCommandIdIsNullOrEmptyWithMessage(string commandId)
+        [ClassData(typeof(ThrowsArgumentExceptionWhenNoArgumentsSupplied_Data))]
+        public void ThrowsnWhenNoArgumentsSupplied(string[] args)
         {
-            var ce = new RouterCommand();
+            var router = new RouterCommand();
 
-            var exception = Assert.Throws<ArgumentException>(() => ce.Execute(commandId));
-
-            AssertThatArgumentExceptionMessageIsGood(exception);
+            var e = Assert.Throws<InvalidCommandArrayException>(() => router.Execute(args));
+            Assert.Equal("The given command array was invalid and could not be executed.", e.Message);
         }
         [Fact]
-        public void ThrowsArgumentExceptionWithMessageWhenArgsIsNull()
+        public void ThrowsWhenCommandThrowsInvalidCommandArrayException()
         {
-            var ce = new RouterCommand();
+            var eToThrow = new InvalidCommandArrayException("The given command array was invalid and could no be executed.");
+            var thrower = new ThrowerCommand(eToThrow);
+            var router = new RouterCommand();
+            router.Register("throw", thrower);
 
-            var exception = Assert.Throws<ArgumentException>(() => ce.Execute());
-
-            AssertThatArgumentExceptionMessageIsGood(exception);
+            var result = Assert.Throws<InvalidCommandArrayException>(() => router.Execute("throw"));
+            Assert.Equal("A registered command was given an invalid command array.", result.Message);
+            Assert.Equal(eToThrow, result.InnerException);
         }
-        [Fact]
-        public void ThrowsArgumentExceptionWithMessageWhenArgsIsEmpty()
+        private class ThrowsArgumentExceptionWhenNoArgumentsSupplied_Data : TheoryData<string[]>
         {
-            var ce = new RouterCommand();
-
-            var exception = Assert.Throws<ArgumentException>(() => ce.Execute(new string[0]));
-
-            AssertThatArgumentExceptionMessageIsGood(exception);
-        }
-        private void AssertThatArgumentExceptionMessageIsGood(ArgumentException e)
-        {
-            Assert.Equal(ArgumentExceptionErrorMessage, e.Message);
+            public ThrowsArgumentExceptionWhenNoArgumentsSupplied_Data()
+            {
+                Add(null);
+                Add(new string[] { });
+                Add(new string[] { null });
+                Add(new[] { "" });
+                Add(new[] { " " });
+                Add(new[] { "           " });
+            }
         }
         [Theory]
         [InlineData(" test","test")]

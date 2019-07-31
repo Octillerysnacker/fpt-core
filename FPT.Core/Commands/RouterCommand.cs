@@ -11,9 +11,9 @@ namespace FPT.Core.Commands{
         }
         public object Execute(params string[] args)
         {
-            if(args is null || args.Length == 0 || args[0] is null || args[0].Trim() == "")
+            if(args is null || args.Length == 0 || string.IsNullOrWhiteSpace(args[0]))
             {
-                throw new ArgumentException("Command ID must exist, not be null or empty.");
+                throw new InvalidCommandArrayException("The given command array was invalid and could not be executed.");
             }
             var commandId = args[0];
             commands.TryGetValue(commandId, out var command);
@@ -23,18 +23,24 @@ namespace FPT.Core.Commands{
             }
             else
             {
-                return command.Execute(args.Skip(1).ToArray());
+                try
+                {
+                    return command.Execute(args.Skip(1).ToArray());
+                }catch(InvalidCommandArrayException e)
+                {
+                    throw new InvalidCommandArrayException("A registered command was given an invalid command array.", e);
+                }
             }
         }
 
-        public void Register(string id, IExecutable sc)
+        public void Register(string id, IExecutable command)
         {
-            id = id.Trim();
-            if(id == "")
+            id = id?.Trim();
+            if(id is null || !id.All(c => char.IsLetterOrDigit(c)))
             {
-                throw new ArgumentException("Command IDs cannot be blank.");
+                throw new ArgumentException("Command ID must be alphanumeric.");
             }
-            commands.Add(id, sc);
+            commands.Add(id, command);
         }
     }
 }
