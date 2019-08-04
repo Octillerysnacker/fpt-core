@@ -25,7 +25,7 @@ namespace FPT.Core.IO
         }
         public void InitializeIfNecessary(string levelId, string user)
         {
-            var levelToInitialize = levelsProvider.GetLevels().Single(level => level.Id == levelId);
+            var levelToInitialize = levelsProvider.GetLevel(levelId);
             var userFolder = path.Combine(levelToInitialize.FolderFilepath, user);
             if(levelInitializationDeterminer.RequiresInitialization(userFolder))
             {
