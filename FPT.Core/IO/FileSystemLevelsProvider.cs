@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using FPT.Core.Model;
+using FPT.Core.Exceptions;
 using System.IO.Abstractions;
 using System.Linq;
 namespace FPT.Core.IO
@@ -18,7 +19,18 @@ namespace FPT.Core.IO
 
         public Level GetLevel(string levelId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(levelId))
+            {
+                throw new InvalidCommandArrayException("No parameter for level ID was provided.");
+            }
+            try
+            {
+                return GetLevels().Single(level => level.Id == levelId);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new LevelNotFoundException($"No level with ID {levelId} was found.");
+            }
         }
 
         public IEnumerable<Level> GetLevels()
