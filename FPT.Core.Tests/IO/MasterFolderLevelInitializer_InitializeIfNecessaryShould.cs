@@ -78,8 +78,8 @@ namespace FPT.Core.Tests.IO
         }
         public class CopyCorrectFilesToCorrectLocation_TestData : TheoryData<FakeLevelsProvider, string, string ,string, string>
         {
-            private int numberOfDataSets = 4;
-            private RandomTriadFactory factory = new RandomTriadFactory();
+            private readonly int numberOfDataSets = 4;
+            private readonly RandomTriadFactory factory = new RandomTriadFactory();
             public CopyCorrectFilesToCorrectLocation_TestData()
             {
                 for(int i = 0; i < numberOfDataSets; i++)

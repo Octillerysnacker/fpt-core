@@ -28,8 +28,9 @@ namespace FPT.Core.Tests.Commands
         }
         public class ProjectFolderTestData : TheoryData<FakeLevelsProvider, string, string, string>
         {
-            private int dataSetCount = 4;
-            private RandomTriadFactory factory = new RandomTriadFactory();
+            private readonly int dataSetCount = 4;
+            private readonly RandomTriadFactory 
+                factory = new RandomTriadFactory();
             public ProjectFolderTestData()
             {
                 for (int i = 0; i < dataSetCount; i++)
@@ -37,6 +38,11 @@ namespace FPT.Core.Tests.Commands
                     CreateAndAddRandomizedData();
                 }
             }
+
+            public int DataSetCount => DataSetCount1;
+
+            public int DataSetCount1 => dataSetCount;
+
             private void CreateAndAddRandomizedData()
             {
                 var triad = factory.CreateTriad();
@@ -68,8 +74,8 @@ namespace FPT.Core.Tests.Commands
         }
         private class TooFewParametersTestData : TheoryData<string[], string>
         {
-            private Random random = new Random();
-            private int arbritraryLength = 25;
+            private readonly Random random = new Random();
+            private readonly int arbritraryLength = 25;
             public TooFewParametersTestData()
             {
                 var errorMessage = "Not enough parameters were passed ({0} out of 2).";
@@ -80,8 +86,8 @@ namespace FPT.Core.Tests.Commands
         }
         public class CorrectParametersTestData : TheoryData<FakeLevelsProvider,string, string>
         {
-            private int dataSetCount = 4;
-            private RandomTriadFactory factory = new RandomTriadFactory();
+            private readonly int dataSetCount = 4;
+            private readonly RandomTriadFactory factory = new RandomTriadFactory();
             public CorrectParametersTestData()
             {
                 for(int i = 0; i< dataSetCount; i++)

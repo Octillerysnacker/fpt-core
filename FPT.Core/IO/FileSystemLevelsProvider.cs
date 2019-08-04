@@ -8,13 +8,19 @@ namespace FPT.Core.IO
 {
     public class FileSystemLevelsProvider : ILevelsProvider
     {
-        IFileSystem fileSystem;
-        string rootFilepath;
+        readonly IFileSystem fileSystem;
+        readonly string rootFilepath;
         public FileSystemLevelsProvider(IFileSystem fileSystem, string rootFilepath)
         {
             this.fileSystem = fileSystem;
             this.rootFilepath = rootFilepath;
         }
+
+        public Level GetLevel(string levelId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Level> GetLevels()
         {
             var levelFiles = fileSystem.Directory.EnumerateFiles(rootFilepath,"level.json",System.IO.SearchOption.AllDirectories);

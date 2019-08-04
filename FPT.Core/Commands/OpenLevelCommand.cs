@@ -9,9 +9,9 @@ namespace FPT.Core.Commands
 {
     public class OpenLevelCommand : IExecutable
     {
-        private ILevelInitializer levelInitializer;
-        private ILevelsProvider levelsProvider;
-        private string errorMessageFormat = "Not enough parameters were passed ({0} out of 2).";
+        private readonly ILevelInitializer levelInitializer;
+        private readonly ILevelsProvider levelsProvider;
+        private readonly string errorMessageFormat = "Not enough parameters were passed ({0} out of 2).";
         public OpenLevelCommand(ILevelInitializer levelInitializer, ILevelsProvider levelsProvider)
         {
             this.levelInitializer = levelInitializer;

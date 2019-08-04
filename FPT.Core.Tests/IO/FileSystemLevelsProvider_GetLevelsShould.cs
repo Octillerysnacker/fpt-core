@@ -25,11 +25,11 @@ namespace FPT.Core.Tests.IO
         }
         public class FindAndReturnAllLevelsInFolder_TestData : TheoryData<MockFileSystem, string, IEnumerable<Level>>
         {
-            MockFileSystem mockFileSystem = new MockFileSystem();
-            FolderPathWithLevels set1 = new FolderPathWithLevels() { FolderPath = "c:\\set1" };
-            FolderPathWithLevels set2 = new FolderPathWithLevels() { FolderPath = "c:\\generic folder\\set2" };
-            FolderPathWithLevels set3 = new FolderPathWithLevels() { FolderPath = "c:\\set3" };
-            FolderPathWithLevels set4 = new FolderPathWithLevels() { FolderPath = "c:\\Documents\\set4" };
+            readonly MockFileSystem mockFileSystem = new MockFileSystem();
+            readonly FolderPathWithLevels set1 = new FolderPathWithLevels() { FolderPath = "c:\\set1" };
+            readonly FolderPathWithLevels set2 = new FolderPathWithLevels() { FolderPath = "c:\\generic folder\\set2" };
+            readonly FolderPathWithLevels set3 = new FolderPathWithLevels() { FolderPath = "c:\\set3" };
+            readonly FolderPathWithLevels set4 = new FolderPathWithLevels() { FolderPath = "c:\\Documents\\set4" };
             public FindAndReturnAllLevelsInFolder_TestData()
             {
                 AddFileToBeAvoidedToSet(set1, "\\.gitignore", "**");
