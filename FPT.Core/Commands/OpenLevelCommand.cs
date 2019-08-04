@@ -33,7 +33,7 @@ namespace FPT.Core.Commands
             levelInitializer.InitializeIfNecessary(levelId, user);
 
             //TO-DO: Remove logical dependency on how folders are structured
-            return System.IO.Path.Combine(levelsProvider.GetLevels().Single(level => level.Id == levelId).FolderFilepath, user, "project");
+            return System.IO.Path.Combine(levelsProvider.GetLevel(levelId).FolderFilepath, user, "project");
         }
     }
 }
