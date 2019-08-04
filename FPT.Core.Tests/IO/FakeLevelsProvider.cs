@@ -18,5 +18,10 @@ namespace FPT.Core.Tests.IO
         {
             return Levels;
         }
+
+        public Level GetLevel(string levelId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
