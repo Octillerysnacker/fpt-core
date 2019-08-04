@@ -3,7 +3,7 @@ using FPT.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 namespace FPT.Core.Tests.IO
 {
     public class FakeLevelsProvider : ILevelsProvider
@@ -21,7 +21,7 @@ namespace FPT.Core.Tests.IO
 
         public Level GetLevel(string levelId)
         {
-            throw new NotImplementedException();
+            return Levels.Single(level => level.Id == levelId);
         }
     }
 }
