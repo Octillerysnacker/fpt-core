@@ -28,7 +28,7 @@ namespace FPT.Core.MainApp
         {
             var main = new RouterCommand();
             var fs = new FileSystem();
-            var provider = new FileSystemLevelsProvider(fs, ".");
+            var provider = new FileSystemLevelsProvider(fs, System.Configuration.ConfigurationManager.AppSettings.Get("LevelsDirectory"));
             main.Register("levels", new GetLevelsCommand(provider));
             main.Register("open", new OpenLevelCommand(new MasterFolderLevelInitializer(new UserJsonLevelInitializationDeterminer(fs), new CopyDir(fs), provider, fs.Path), provider));
             return main;

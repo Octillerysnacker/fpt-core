@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FPT.Core.MainApp": {
+      "commandName": "Project",
+      "commandLineArgs": "levels"
+    }
+  }
+}
