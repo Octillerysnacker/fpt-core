@@ -2,7 +2,7 @@
 using FPT.Core.IO;
 using System;
 using System.IO.Abstractions;
-
+using Newtonsoft.Json;
 namespace FPT.Core.MainApp
 {
     class Program
@@ -10,18 +10,14 @@ namespace FPT.Core.MainApp
         static void Main(string[] args)
         {
             var main = BuildApp();
-            object result = new InvalidOperationException("An error occurred and no output was returned.");
             try
             {
-                result = main.Execute(args);
+                var result = main.Execute(args);
+                Console.WriteLine(JsonConvert.SerializeObject(result));
             }
             catch (Exception e)
             {
-                result = new SummarizedException(e);
-            }
-            finally
-            {
-                Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+                Console.Error.WriteLine(JsonConvert.SerializeObject(new SummarizedException(e)));
             }
         }
         static IExecutable BuildApp()
