@@ -28,7 +28,7 @@ namespace FPT.Core.IO
                 initializerFilepath: deserializedContent["InitializerFilepath"],
                 verifierFilepath: deserializedContent["VerifierFilepath"],
                 instructionsFilepath: deserializedContent["InstructionsFilepath"],
-                folderFilepath: path.GetDirectoryName(filepath)
+                folderFilepath: path.GetFullPath(filepath)
                 );
         }
     }
