@@ -27,6 +27,7 @@ namespace FPT.Core.MainApp
             var provider = new FileSystemLevelsProvider(fs, System.Configuration.ConfigurationManager.AppSettings.Get("LevelsDirectory"));
             main.Register("levels", new GetLevelsCommand(provider));
             main.Register("open", new OpenLevelCommand(new MasterFolderLevelInitializer(new UserJsonLevelInitializationDeterminer(fs), new CopyDir(fs), provider, fs.Path), provider));
+            main.Register("instructions", new GetInstructionsPathCommand(provider));
             return main;
         }
         private class SummarizedException
