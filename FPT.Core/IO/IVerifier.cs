@@ -7,6 +7,6 @@ namespace FPT.Core.IO
 {
     public interface IVerifier
     {
-        object Verify(Level level, string user);
+        VerifierResult Verify(Level level, string user);
     }
 }

@@ -10,8 +10,8 @@ namespace FPT.Core.Tests.IO
     {
         public Level Level { get; private set; }
         public string User { get; private set; }
-        public object Return { get; set; }
-        public object Verify(Level level, string user)
+        public VerifierResult Return { get; set; }
+        public VerifierResult Verify(Level level, string user)
         {
             Level = level;
             User = user;

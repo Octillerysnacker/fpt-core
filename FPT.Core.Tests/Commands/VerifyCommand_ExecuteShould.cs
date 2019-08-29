@@ -1,6 +1,7 @@
 ﻿using FPT.Core.Commands;
 using FPT.Core.Exceptions;
 using FPT.Core.Extensions;
+using FPT.Core.Model;
 using FPT.Core.Tests.IO;
 using System;
 using System.Collections.Generic;
@@ -37,12 +38,8 @@ namespace FPT.Core.Tests.Commands
             }
         }
         [Theory]
-        [InlineData(0)]
-        [InlineData("  ")]
-        [InlineData(false)]
-        [InlineData(null)]
-        [InlineData(3.14)]
-        public void ReturnResultFromVerifier(object toReturn)
+        [ClassData(typeof(ReturnResultFromVerifier_Data))]
+        public void ReturnResultFromVerifier(VerifierResult toReturn)
         {
             var verifier = new MockVerifier() { Return = toReturn };
             var provider = new CustomFakeLevelsProvider() { Level = null };
@@ -51,6 +48,14 @@ namespace FPT.Core.Tests.Commands
             var result = command.Execute("", "");
 
             Assert.Equal(toReturn, result);
+        }
+        private class ReturnResultFromVerifier_Data : TheoryData<VerifierResult>
+        {
+            public ReturnResultFromVerifier_Data()
+            {
+                Add(null);
+                Add(new VerifierResult(false, null));
+            }
         }
         [Theory]
         [ClassData(typeof(ThrowWhenTooFewParametersPassed_Data))]
