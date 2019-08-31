@@ -16,5 +16,9 @@ namespace FPT.Core.Extensions
             }
             return stringBuilder.ToString();
         }
+        public static bool NextBool(this Random random)
+        {
+            return (random.Next(0, 2) == 0) ? false : true;
+        }
     }
 }
