@@ -9,11 +9,11 @@ namespace FPT.Core.Model
         public class FileLocation
         {
             public int Line { get; }
-            public int Postition { get; }
+            public int Position { get; }
             public FileLocation(int line, int position)
             {
                 Line = line;
-                Postition = position;
+                Position = position;
             }
         }
         public enum DiagnosticKind { Error, Warning, Info };
