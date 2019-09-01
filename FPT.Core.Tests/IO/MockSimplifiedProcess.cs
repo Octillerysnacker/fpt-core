@@ -11,6 +11,11 @@ namespace FPT.Core.Tests.IO
         public StreamReader StandardOutput { get; set; }
         public bool HasBeenWaited { get; private set; }
 
+        public bool Start()
+        {
+            throw new NotImplementedException();
+        }
+
         public void WaitForExit()
         {
             HasBeenWaited = true;
