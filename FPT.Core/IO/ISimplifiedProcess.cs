@@ -8,5 +8,6 @@ namespace FPT.Core.IO
     public interface ISimplifiedProcess
     {
         StreamReader StandardOutput { get; }
+        bool Start();
     }
 }
