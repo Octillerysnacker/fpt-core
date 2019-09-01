@@ -4,13 +4,14 @@ using System.IO.Abstractions.TestingHelpers;
 using System.Text;
 using FPT.Core.Commands;
 using FPT.Core.IO;
-using FPT.Core.Tests.IO;
-using FPT.Core.Model;
 using Xunit;
 using FPT.Core.Tests.Extensions;
 using FPT.Core.Extensions;
 using System.IO;
 using FPT.Core.Exceptions;
+using FPT.Core.Levels;
+using FPT.Core.Tests.Levels.Initialization;
+using FPT.Core.Tests.Levels.Providers;
 
 namespace FPT.Core.Tests.Commands
 {

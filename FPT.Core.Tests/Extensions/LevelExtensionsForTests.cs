@@ -1,9 +1,10 @@
-﻿using FPT.Core.Model;
-using FPT.Core.Tests.IO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using FPT.Core.Extensions;
+using FPT.Core.Levels;
+using FPT.Core.Tests.Levels.Providers;
+
 namespace FPT.Core.Tests.Extensions
 {
     public static class LevelExtensionsForTests

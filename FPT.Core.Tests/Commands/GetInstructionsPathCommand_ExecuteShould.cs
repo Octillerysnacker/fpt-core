@@ -1,12 +1,12 @@
 ﻿using FPT.Core.Commands;
-using FPT.Core.Tests.IO;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using FPT.Core.Model;
 using FPT.Core.Exceptions;
+using FPT.Core.Levels;
+using FPT.Core.Tests.Levels.Providers;
 
 namespace FPT.Core.Tests.Commands
 {
