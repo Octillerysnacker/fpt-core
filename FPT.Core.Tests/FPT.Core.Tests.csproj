@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="IO\JarFileProcessFactory_TestJars\outputParams.jar" />
+    <None Remove="IO\JarFileProcessFactory_TestJars\testPassed.jar" />
     <None Remove="Learning\writerboi\writer boi.deps.json" />
     <None Remove="Learning\writerboi\writer boi.dll" />
     <None Remove="Learning\writerboi\writer boi.pdb" />
@@ -30,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="IO\JarFileProcessFactory_TestJars\outputParams.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Learning\writerboi\writer boi.deps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -40,6 +45,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Learning\writerboi\writer boi.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="IO\JarFileProcessFactory_TestJars\testPassed.jar">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
