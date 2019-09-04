@@ -8,15 +8,13 @@ namespace FPT.Core.Levels
     {
         public string Name { get; }
         public string Id { get; }
-        public string InitializerFilepath { get; }
         public string VerifierFilepath { get; }
         public string InstructionsFilepath { get; }
         public string FolderFilepath { get; }
-        public Level(string name = "", string id = "", string initializerFilepath = "", string verifierFilepath = "", string instructionsFilepath = "", string folderFilepath = "")
+        public Level(string name = "", string id = "", string verifierFilepath = "", string instructionsFilepath = "", string folderFilepath = "")
         {
             Name = name;
             Id = id;
-            InitializerFilepath = initializerFilepath;
             VerifierFilepath = verifierFilepath;
             InstructionsFilepath = instructionsFilepath;
             FolderFilepath = folderFilepath;

@@ -24,7 +24,6 @@ namespace FPT.Core.Levels
             return new Level(
                 name: deserializedContent["Name"],
                 id: deserializedContent["Id"],
-                initializerFilepath: deserializedContent["InitializerFilepath"],
                 verifierFilepath: deserializedContent["VerifierFilepath"],
                 instructionsFilepath: deserializedContent["InstructionsFilepath"],
                 folderFilepath: path.GetDirectoryName(path.GetFullPath(filepath))
