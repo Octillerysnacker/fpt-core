@@ -1,0 +1,6 @@
+{
+  "Id": "fpt.test.testLevel",
+  "Name": "FPT Test Level",
+  "VerifierFilepath": "./fpt-verifiers-success-1.0.jar",
+  "InstructionsFilepath": "./instructions.md"
+}
