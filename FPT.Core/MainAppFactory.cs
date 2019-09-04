@@ -12,11 +12,11 @@ namespace FPT.Core
 {
     public class MainAppFactory
     {
-        public static IExecutable MakeApp()
+        public static IExecutable MakeApp(string rootPath = ".")
         {
             var main = new RouterCommand();
             var fs = new FileSystem();
-            var provider = new FileSystemLevelsProvider(fs, ".");
+            var provider = new FileSystemLevelsProvider(fs, rootPath);
 
             main.Register("levels", new GetLevelsCommand(provider));
             main.Register("open", new OpenLevelCommand(
