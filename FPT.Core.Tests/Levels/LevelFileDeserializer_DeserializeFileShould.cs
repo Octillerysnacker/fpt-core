@@ -28,7 +28,6 @@ namespace FPT.Core.Tests.Levels
                 CreateAndAddDataFromLevel(new Level(
                     name: "Test Level 1",
                     id: "test.1",
-                    initializerFilepath: "c:\\levels\\test1\\initializer.bat",
                     verifierFilepath: "c:\\levels\\test1\\verifier.bat",
                     instructionsFilepath: "c:\\levels\\test1\\instructions.md",
                     folderFilepath: "c:\\levels\\test1"
@@ -36,7 +35,6 @@ namespace FPT.Core.Tests.Levels
                 CreateAndAddDataFromLevel(new Level(
                     name: "FRC Programming Trainer",
                     id: "fpt.main",
-                    initializerFilepath: "c:\\fpt\\init.sh",
                     verifierFilepath: "c:\\fpt\\verifier.sh",
                     instructionsFilepath: "c:\\fpt\\instructions.md",
                     folderFilepath: "c:\\fpt"
@@ -44,7 +42,6 @@ namespace FPT.Core.Tests.Levels
                 CreateAndAddDataFromLevel(new Level(
                     name: "Java: Variables Introduction",
                     id: "java.basics.variables",
-                    initializerFilepath: "c:\\levels\\java\\variables\\initializer.js",
                     verifierFilepath: "c:\\levels\\java\\variables\\verifier.js",
                     instructionsFilepath: "c:\\levels\\java\\variables\\instructions.md",
                     folderFilepath: "c:\\levels\\java\\variables"

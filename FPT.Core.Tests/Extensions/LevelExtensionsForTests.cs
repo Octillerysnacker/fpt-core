@@ -26,7 +26,7 @@ namespace FPT.Core.Tests.Extensions
         public static Level GenerateRandomLevel(this Random random)
         {
             string _() => random.RandomString(LengthOfRandomStrings);
-            return new Level(_(), _(), _(), _(), _(), _());
+            return new Level(_(), _(), _(), _(), _());
         }
     }
 }
