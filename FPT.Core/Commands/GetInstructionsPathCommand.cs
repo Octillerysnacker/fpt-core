@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using FPT.Core.Exceptions;
 using FPT.Core.Levels.Providers;
+using FPT.Core.IO;
 
 namespace FPT.Core.Commands
 {
@@ -21,7 +22,7 @@ namespace FPT.Core.Commands
                 throw new InvalidCommandArrayException("Not enough parameters were passed (0 out of 1).");
             }
             var level = provider.GetLevel(args[0]);
-            return Path.Combine(level.FolderFilepath, level.InstructionsFilepath);
+            return LevelPathsProvider.GetInstructionsPath(level);
         }
     }
 }

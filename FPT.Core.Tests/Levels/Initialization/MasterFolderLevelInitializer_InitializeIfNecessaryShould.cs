@@ -11,6 +11,7 @@ using FPT.Core.Levels.Initialization;
 using FPT.Core.Levels;
 using FPT.Core.Tests.IO;
 using FPT.Core.Tests.Levels.Providers;
+using FPT.Core.IO;
 
 namespace FPT.Core.Tests.Levels.Initialization
 {
@@ -29,7 +30,7 @@ namespace FPT.Core.Tests.Levels.Initialization
             var levelToInitialize = new Level(id: levelId, folderFilepath: ".");
             var levelsProvider = new FakeLevelsProvider(new[] { levelToInitialize });
             var mockFileSystem = new MockFileSystem();
-            mockFileSystem.AddDirectory(Path.Combine(".", "master")); //will throw error if no master folder
+            mockFileSystem.AddDirectory(levelToInitialize.GetMasterFolder()); //will throw error if no master folder
 
             var masterFolderLevelInitializer = new MasterFolderLevelInitializer(initializationDeterminer,
                                                                                 copyDir,
@@ -51,7 +52,7 @@ namespace FPT.Core.Tests.Levels.Initialization
             var mockFileSystem = new MockFileSystem();
             foreach (var level in fakeLevelsProvider.GetLevels())
             {
-                mockFileSystem.AddDirectory(mockFileSystem.Path.Combine(level.FolderFilepath, "master")); //put master folder in every level folder to prevent error
+                mockFileSystem.AddDirectory(level.GetMasterFolder()); //put master folder in every level folder to prevent error
             }
             var masterFolderLevelInitializer = new MasterFolderLevelInitializer(determinerIndicatingInitialization,
                                                                                 copyDir,
@@ -94,11 +95,8 @@ namespace FPT.Core.Tests.Levels.Initialization
             {
                 var triad = factory.CreateTriad();
 
-                var nameOfMasterFolder = "master";
-                var nameOfProjectFolder = "project";
-
-                var expectedSourceDir = Path.Combine(triad.Level.FolderFilepath, nameOfMasterFolder); //TO-DO: Remove logical dependencies on folder structure
-                var expectedDestDir = Path.Combine(triad.Level.FolderFilepath, triad.User, nameOfProjectFolder);
+                var expectedSourceDir = triad.Level.GetMasterFolder();
+                var expectedDestDir = triad.Level.GetProjectFolder(triad.User);
 
                 Add(triad.Provider, triad.Level.Id, triad.User, expectedSourceDir, expectedDestDir);
             }

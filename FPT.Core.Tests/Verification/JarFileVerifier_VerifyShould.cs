@@ -4,6 +4,7 @@ using FPT.Core.Levels;
 using FPT.Core.Tests.Extensions;
 using FPT.Core.Tests.IO;
 using FPT.Core.Verification;
+using FPT.Core.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -62,9 +63,9 @@ namespace FPT.Core.Tests.Verification
 
             verifier.Verify(level, user);
 
-            Assert.Equal(Path.Combine(level.FolderFilepath, level.VerifierFilepath), factory.JarPath);
-            Assert.Equal(Path.Combine(level.FolderFilepath, user, "project"), factory.ProjectFolder);
-            Assert.Equal(Path.Combine(level.FolderFilepath, user), factory.UserFolder);
+            Assert.Equal(level.GetVerifierFilepath(), factory.JarPath);
+            Assert.Equal(level.GetProjectFolder(user), factory.ProjectFolder);
+            Assert.Equal(level.GetUserFolder(user), factory.UserFolder);
         }
         private class PassCorrectParametersToProcessFactory_Data : TheoryData<MockJarFileProcessFactory, Level, string>
         {

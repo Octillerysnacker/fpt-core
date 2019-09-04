@@ -48,7 +48,7 @@ namespace FPT.Core.Tests.Commands
             {
                 var triad = factory.CreateTriad();
 
-                var expectedPath = Path.Combine(triad.Level.FolderFilepath, triad.User, "project");
+                var expectedPath = triad.Level.GetProjectFolder(triad.User);
                 Add(triad.Provider, triad.Level.Id, triad.User, expectedPath);
             }
         }

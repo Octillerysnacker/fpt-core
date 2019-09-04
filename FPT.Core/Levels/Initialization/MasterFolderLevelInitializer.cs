@@ -28,12 +28,11 @@ namespace FPT.Core.Levels.Initialization
         public void InitializeIfNecessary(string levelId, string user)
         {
             var levelToInitialize = levelsProvider.GetLevel(levelId);
-            var userFolder = path.Combine(levelToInitialize.FolderFilepath, user);
+            var userFolder = levelToInitialize.GetUserFolder(user);
             if (levelInitializationDeterminer.RequiresInitialization(userFolder))
             {
-                //TO-DO: Remove logical dependency on folder structure
-                var masterFolder = path.Combine(levelToInitialize.FolderFilepath, "master");
-                var projectFolder = path.Combine(userFolder, "project");
+                var masterFolder = levelToInitialize.GetMasterFolder();
+                var projectFolder = levelToInitialize.GetProjectFolder(user);
 
                 if (!path.FileSystem.Directory.Exists(masterFolder))
                 {

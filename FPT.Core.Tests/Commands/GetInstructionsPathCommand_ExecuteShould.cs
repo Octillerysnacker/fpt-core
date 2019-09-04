@@ -7,6 +7,7 @@ using Xunit;
 using FPT.Core.Exceptions;
 using FPT.Core.Levels;
 using FPT.Core.Tests.Levels.Providers;
+using FPT.Core.IO;
 
 namespace FPT.Core.Tests.Commands
 {
@@ -31,7 +32,7 @@ namespace FPT.Core.Tests.Commands
                 for(int i = 0; i < dataSetCount; i++)
                 {
                     var triad = factory.CreateTriad();
-                    var expectedPath = Path.Combine(triad.Level.FolderFilepath, triad.Level.InstructionsFilepath);
+                    var expectedPath = triad.Level.GetInstructionsPath();
                     Add(triad.Provider, triad.Level.Id, expectedPath);
                 }
             }

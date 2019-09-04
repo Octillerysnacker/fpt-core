@@ -5,6 +5,7 @@ using System.Linq;
 using FPT.Core.Exceptions;
 using FPT.Core.Levels.Initialization;
 using FPT.Core.Levels.Providers;
+using FPT.Core.IO;
 
 namespace FPT.Core.Commands
 {
@@ -33,8 +34,7 @@ namespace FPT.Core.Commands
 
             levelInitializer.InitializeIfNecessary(levelId, user);
 
-            //TO-DO: Remove logical dependency on how folders are structured
-            return System.IO.Path.Combine(levelsProvider.GetLevel(levelId).FolderFilepath, user, "project");
+            return levelsProvider.GetLevel(levelId).GetProjectFolder(user);
         }
     }
 }

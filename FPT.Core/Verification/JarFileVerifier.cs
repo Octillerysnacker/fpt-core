@@ -20,9 +20,9 @@ namespace FPT.Core.Verification
         public VerifierResult Verify(Level level, string user)
         {
             var process = factory.CreateProcess(
-                Path.Combine(level.FolderFilepath, level.VerifierFilepath),
-                Path.Combine(level.FolderFilepath, user),
-                Path.Combine(level.FolderFilepath, user, "project"));
+                level.GetVerifierFilepath(),
+                level.GetUserFolder(user),
+                level.GetProjectFolder(user));
             var json = process.StandardOutput.ReadToEnd();
             return JsonConvert.DeserializeObject<VerifierResult>(json);
         }
