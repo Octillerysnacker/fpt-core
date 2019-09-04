@@ -2,6 +2,7 @@
 using FPT.Core.IO;
 using FPT.Core.Levels.Initialization;
 using FPT.Core.Levels.Providers;
+using FPT.Core;
 using System;
 using System.IO.Abstractions;
 
@@ -11,7 +12,7 @@ namespace FPT.Core.IntegrationTestApp
     {
         static void Main(string[] args)
         {
-            var main = BuildApp();
+            var main = MainAppFactory.MakeApp("./levels");
 
             var input = Console.ReadLine();
             while(input != "quit")
@@ -30,15 +31,6 @@ namespace FPT.Core.IntegrationTestApp
                 }
                 input = Console.ReadLine();
             }
-        }
-        static IExecutable BuildApp()
-        {
-            var main = new RouterCommand();
-            var fs = new FileSystem();
-            var provider = new FileSystemLevelsProvider(fs, ".");
-            main.Register("levels", new GetLevelsCommand(provider));
-            main.Register("open", new OpenLevelCommand(new MasterFolderLevelInitializer(new UserJsonLevelInitializationDeterminer(fs), new CopyDir(fs), provider, fs.Path), provider));
-            return main;
         }
         private class SummarizedException
         {

@@ -12,7 +12,7 @@ namespace FPT.Core.MainApp
     {
         static void Main(string[] args)
         {
-            var main = BuildApp();
+            var main = MainAppFactory.MakeApp();
             try
             {
                 var result = main.Execute(args);
@@ -22,16 +22,6 @@ namespace FPT.Core.MainApp
             {
                 Console.Error.WriteLine(JsonConvert.SerializeObject(new SummarizedException(e)));
             }
-        }
-        static IExecutable BuildApp()
-        {
-            var main = new RouterCommand();
-            var fs = new FileSystem();
-            var provider = new FileSystemLevelsProvider(fs, System.Configuration.ConfigurationManager.AppSettings.Get("LevelsDirectory"));
-            main.Register("levels", new GetLevelsCommand(provider));
-            main.Register("open", new OpenLevelCommand(new MasterFolderLevelInitializer(new UserJsonLevelInitializationDeterminer(fs), new CopyDir(fs), provider, fs.Path), provider));
-            main.Register("instructions", new GetInstructionsPathCommand(provider));
-            return main;
         }
         private class SummarizedException
         {
