@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using FPT.Core.Tests.Extensions;
 using FPT.Core.Verification;
 using FPT.Core.Equality;
+using FPT.Core.Extensions;
 
 namespace FPT.Core.Tests.Verification
 {
@@ -13,6 +14,7 @@ namespace FPT.Core.Tests.Verification
     {
         [Theory]
         [ClassData(typeof(BeSerializedAndDeserializedProperly_Data))]
+        [ClassData(typeof(NullFileLocations_Data))]
         public void BeSerializedAndDeserializedProperly(FPTDiagnostic diagnostic)
         {
             var serialized = JsonConvert.SerializeObject(diagnostic);
@@ -31,6 +33,28 @@ namespace FPT.Core.Tests.Verification
                 {
                     Add(random.NextFPTDiagnostic());
                 }
+            }
+        }
+        private class NullFileLocations_Data : TheoryData<FPTDiagnostic> {
+            private Random random = new Random();
+            private int minRandomLength = 0, maxRandomLength = 25;
+            public NullFileLocations_Data()
+            {
+                Add(GenerateDiagnosticWithRandomMessageandKind(null, GenerateRandomFileLocation()));
+                Add(GenerateDiagnosticWithRandomMessageandKind(GenerateRandomFileLocation(), null));
+                Add(GenerateDiagnosticWithRandomMessageandKind(null, null));
+            }
+            private FPTDiagnostic GenerateDiagnosticWithRandomMessageandKind(FPTDiagnostic.FileLocation start, FPTDiagnostic.FileLocation end)
+            {
+                return new FPTDiagnostic(
+                    random.RandomString(random.Next(minRandomLength, maxRandomLength)),
+                    (FPTDiagnostic.DiagnosticKind)random.Next(0, 3),
+                    start,
+                    end);
+            }
+            private FPTDiagnostic.FileLocation GenerateRandomFileLocation()
+            {
+                return new FPTDiagnostic.FileLocation(random.Next(), random.Next());
             }
         }
     }
