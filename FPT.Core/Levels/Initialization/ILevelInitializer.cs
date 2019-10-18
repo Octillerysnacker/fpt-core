@@ -7,5 +7,6 @@ namespace FPT.Core.Levels.Initialization
     public interface ILevelInitializer
     {
         void InitializeIfNecessary(string levelId, string user);
+        void Clean(string levelId, string user);
     }
 }

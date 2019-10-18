@@ -61,8 +61,8 @@ namespace FPT.Core.Tests.Commands
 
             command.Execute(levelId, user);
 
-            Assert.Equal(levelId, initializer.SuppliedLevelId);
-            Assert.Equal(user, initializer.SuppliedUser);
+            Assert.Equal(levelId, initializer.InitializedLevelId);
+            Assert.Equal(user, initializer.InitializedUser);
         }
         [Theory]
         [ClassData(typeof(TooFewParametersTestData))]

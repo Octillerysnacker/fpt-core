@@ -8,5 +8,6 @@ namespace FPT.Core.Levels.Initialization
     {
         bool RequiresInitialization(string userFolderPath);
         void MarkAsInitialized(string userFolderPath);
+        void UnmarkAsInitialized(string userFOlderPath);
     }
 }

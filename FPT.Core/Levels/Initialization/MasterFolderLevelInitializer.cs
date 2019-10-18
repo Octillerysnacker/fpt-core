@@ -25,6 +25,16 @@ namespace FPT.Core.Levels.Initialization
             this.levelsProvider = levelsProvider;
             this.path = path;
         }
+
+        public void Clean(string levelId, string user)
+        {
+            var level = levelsProvider.GetLevel(levelId);
+            var projectFolder = level.GetProjectFolder(user);
+            levelInitializationDeterminer.UnmarkAsInitialized(level.GetUserFolder(user));
+            path.FileSystem.Directory.Delete(projectFolder,true);
+            path.FileSystem.Directory.CreateDirectory(projectFolder);
+        }
+
         public void InitializeIfNecessary(string levelId, string user)
         {
             var levelToInitialize = levelsProvider.GetLevel(levelId);

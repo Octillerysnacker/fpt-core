@@ -35,5 +35,10 @@ namespace FPT.Core.Levels.Initialization
                 return amountOfUserJsonFiles != 1;
             }
         }
+
+        public void UnmarkAsInitialized(string userFOlderPath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

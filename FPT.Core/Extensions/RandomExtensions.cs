@@ -20,5 +20,9 @@ namespace FPT.Core.Extensions
         {
             return (random.Next(0, 2) == 0) ? false : true;
         }
+        public static string NextString(this Random random, int minLength, int maxLength)
+        {
+            return random.RandomString(random.Next(minLength, maxLength));
+        }
     }
 }
