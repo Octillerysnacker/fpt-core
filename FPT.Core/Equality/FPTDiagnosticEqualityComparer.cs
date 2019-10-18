@@ -9,12 +9,12 @@ namespace FPT.Core.Equality
     {
         public bool Equals(FPTDiagnostic x, FPTDiagnostic y)
         {
-            return x.End.Line == y.End.Line &&
-                x.End.Position == y.End.Position &&
-                x.Kind == y.Kind &&
-                x.Message == y.Message &&
-                x.Start.Line == y.Start.Line &&
-                x.Start.Position == y.Start.Position;
+            return x?.End?.Line == y?.End?.Line &&
+                x?.End?.Position == y?.End?.Position &&
+                x?.Kind == y?.Kind &&
+                x?.Message == y?.Message &&
+                x?.Start?.Line == y?.Start?.Line &&
+                x?.Start?.Position == y?.Start?.Position;
         }
 
         public int GetHashCode(FPTDiagnostic obj)
