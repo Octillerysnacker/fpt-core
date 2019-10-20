@@ -38,7 +38,7 @@ namespace FPT.Core.Levels.Initialization
 
         public void UnmarkAsInitialized(string userFOlderPath)
         {
-            throw new NotImplementedException();
+            fileSystem.File.Delete(fileSystem.Path.Combine(userFOlderPath, userJsonFileName));
         }
     }
 }
