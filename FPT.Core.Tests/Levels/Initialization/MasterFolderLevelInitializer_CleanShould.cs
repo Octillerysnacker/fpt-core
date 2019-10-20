@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using FPT.Core.IO;
 using FPT.Core.Levels;
+using System.IO;
 
 namespace FPT.Core.Tests.Levels.Initialization
 {
@@ -22,7 +23,8 @@ namespace FPT.Core.Tests.Levels.Initialization
             var determiner = new MockLevelInitializationDeterminer(false, true);
             var initializer = new MasterFolderLevelInitializer(determiner, new MockCopyDir(), provider , new MockPath(new MockFileSystem()));
 
-            initializer.Clean(levelId, user);
+            //This Assert.Throws code is necessary, as we are not testing for any actual IO operations
+            Assert.Throws<DirectoryNotFoundException>(() => initializer.Clean(levelId, user));
 
             Assert.False(determiner.IsMarkedAsInitialized);
             Assert.Equal(expectedUserFolder, determiner.SuppliedUserFolderPath);
