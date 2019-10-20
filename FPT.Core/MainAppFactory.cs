@@ -17,20 +17,22 @@ namespace FPT.Core
             var main = new RouterCommand();
             var fs = new FileSystem();
             var provider = new FileSystemLevelsProvider(fs, rootPath);
-
-            main.Register("levels", new GetLevelsCommand(provider));
-            main.Register("open", new OpenLevelCommand(
-                new MasterFolderLevelInitializer(
+            var initializer = new MasterFolderLevelInitializer(
                     new UserJsonLevelInitializationDeterminer(fs),
                     new CopyDir(fs),
                     provider,
-                    fs.Path), 
+                    fs.Path);
+
+            main.Register("levels", new GetLevelsCommand(provider));
+            main.Register("open", new OpenLevelCommand(
+                initializer, 
                 provider));
             main.Register("instructions", new GetInstructionsPathCommand(provider));
             main.Register("verify", new VerifyCommand(
                 provider,
                 new JarFileVerifier(new JarFileProcessFactory())
                 ));
+            main.Register("reset", new ResetLevelCommand(initializer));
 
             return main;
         }
